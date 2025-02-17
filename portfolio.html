@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avrix Creative Digital Studio</title>
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0420 0%, #0c0525 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Animation Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px rgba(99, 95, 255, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(99, 95, 255, 0.8);
+            }
+            100% {
+                text-shadow: 0 0 5px rgba(99, 95, 255, 0.5);
+            }
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        
+        .logo svg {
+            animation: pulse 3s infinite;
+        }
+        
+        .logo img {
+            width: 40px;
+            margin-right: 5px;
+        }
+        
+        .logo h3 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        .nav-links li:nth-child(1) { animation-delay: 0.1s; }
+        .nav-links li:nth-child(2) { animation-delay: 0.2s; }
+        .nav-links li:nth-child(3) { animation-delay: 0.3s; }
+        .nav-links li:nth-child(4) { animation-delay: 0.4s; }
+        .nav-links li:nth-child(5) { animation-delay: 0.5s; }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            position: relative;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #635fff;
+        }
+        
+        .nav-links a i {
+            margin-right: 5px;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+        
+        .nav-links a:hover i {
+            transform: translateY(-3px);
+            color: #635fff;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #635fff;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            animation: fadeInUp 0.8s ease-out forwards;
+            transition: transform 0.3s;
+        }
+        
+        .hamburger:hover {
+            transform: scale(1.1);
+            color: #635fff;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-subtitle {
+            color: #635fff;
+            font-size: 18px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideInLeft 0.8s ease-out 0.3s forwards, glow 3s infinite;
+        }
+        
+        .hero-title {
+            font-size: 80px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1;
+            opacity: 0;
+            animation: slideInLeft 0.8s ease-out 0.5s forwards;
+        }
+        
+        .hero-title span {
+            display: block;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.7);
+            font-size: 80px;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: slideInLeft 0.8s ease-out 0.7s forwards;
+        }
+        
+        /* Background Animation */
+        .wave-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-out 0.2s forwards;
+        }
+        
+        @keyframes move {
+            0% {
+                transform: translate(-5px, 0);
+            }
+            50% {
+                transform: translate(5px, -5px);
+            }
+            100% {
+                transform: translate(-5px, 0);
+            }
+        }
+        
+        /* Award Badge */
+        .award-badge {
+            position: absolute;
+            right: 80px;
+            bottom: 130px;
+            width: 120px;
+            height: 120px;
+            animation: rotate 10s linear infinite, float 5s ease-in-out infinite, fadeInUp 1s ease-out 1.2s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .badge-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4287f5, #42c5f5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 15px rgba(66, 135, 245, 0.7);
+        }
+        
+        .badge-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: counterRotate 10s linear infinite;
+        }
+        
+        @keyframes counterRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+        
+        .badge-inner {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4287f5;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 4, 32, 0.95);
+            z-index: 10;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .mobile-menu.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+        }
+        
+        .mobile-menu li {
+            margin: 15px 0;
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .mobile-menu.active li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .mobile-menu.active li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu.active li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-menu.active li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-menu.active li:nth-child(4) { transition-delay: 0.4s; }
+        .mobile-menu.active li:nth-child(5) { transition-delay: 0.5s; }
+        
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s, transform 0.3s;
+        }
+        
+        .mobile-menu a:hover {
+            color: #635fff;
+            transform: translateX(5px);
+        }
+        
+        .mobile-menu a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .mobile-menu a:hover i {
+            transform: translateY(-3px);
+            color: #635fff;
+        }
+        
+        /* Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid white;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s, border-color 0.3s;
+            display: none;
+        }
+        
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: #635fff;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9998;
+            transition: 0.1s;
+            display: none;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 50px;
+            }
+            
+            .hero-title span {
+                font-size: 50px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .award-badge {
+                width: 80px;
+                height: 80px;
+                right: 40px;
+                bottom: 80px;
+            }
+            
+            .badge-inner {
+                width: 50px;
+                height: 50px;
+                font-size: 9px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="19" stroke="white" stroke-width="2"/>
+                    <path d="M13 27L20 13L27 27H13Z" stroke="white" stroke-width="2"/>
+                </svg>
+                <h3>AVRIX</h3>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Pages</a></li>
+                <li><a href="#"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <button class="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Pages</a></li>
+                <li><a href="#"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+        
+        <div class="hero">
+            <div class="hero-subtitle">Creative digital studio</div>
+            <h1 class="hero-title">
+                BUILD GREAT
+                <span>PORTFOLIO</span>
+            </h1>
+        </div>
+        
+        <div class="wave-bg">
+            <svg width="100%" height="100%" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0 300 C 150 200 300 100 450 250 C 600 400 750 350 900 300" 
+                      stroke="#4287f5" 
+                      fill="none" 
+                      stroke-width="1.5"
+                      opacity="0.3"
+                      stroke-linecap="round">
+                    <animate attributeName="d" 
+                             values="
+                             M 0 300 C 150 200 300 100 450 250 C 600 400 750 350 900 300;
+                             M 0 300 C 150 250 300 150 450 300 C 600 450 750 400 900 300;
+                             M 0 300 C 150 300 300 200 450 250 C 600 350 750 450 900 300;
+                             M 0 300 C 150 200 300 100 450 250 C 600 400 750 350 900 300"
+                             dur="20s" 
+                             repeatCount="indefinite"/>
+                </path>
+                <path d="M 0 350 C 150 250 300 150 450 300 C 600 450 750 400 900 350" 
+                      stroke="#42c5f5" 
+                      fill="none" 
+                      stroke-width="1.5"
+                      opacity="0.3"
+                      stroke-linecap="round">
+                    <animate attributeName="d" 
+                             values="
+                             M 0 350 C 150 250 300 150 450 300 C 600 450 750 400 900 350;
+                             M 0 350 C 150 300 300 200 450 350 C 600 500 750 450 900 350;
+                             M 0 350 C 150 350 300 250 450 300 C 600 400 750 500 900 350;
+                             M 0 350 C 150 250 300 150 450 300 C 600 450 750 400 900 350"
+                             dur="25s" 
+                             repeatCount="indefinite"/>
+                </path>
+                <path d="M 0 400 C 150 300 300 200 450 350 C 600 500 750 450 900 400" 
+                      stroke="#635fff" 
+                      fill="none" 
+                      stroke-width="1.5"
+                      opacity="0.3"
+                      stroke-linecap="round">
+                    <animate attributeName="d" 
+                             values="
+                             M 0 400 C 150 300 300 200 450 350 C 600 500 750 450 900 400;
+                             M 0 400 C 150 350 300 250 450 400 C 600 550 750 500 900 400;
+                             M 0 400 C 150 400 300 300 450 350 C 600 450 750 550 900 400;
+                             M 0 400 C 150 300 300 200 450 350 C 600 500 750 450 900 400"
+                             dur="30s" 
+                             repeatCount="indefinite"/>
+                </path>
+            </svg>
+        </div>
+        
+        <div class="award-badge">
+            <div class="badge-circle">
+                <div class="badge-text">
+                    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <path id="curve" d="M60,15 a45,45 0 1,1 0,90 a45,45 0 1,1 0,-90" fill="none"/>
+                        <text width="100%" style="font-size: 10px; font-weight: bold; fill: white;">
+                            <textPath xlink:href="#curve">
+                                AWARD WINNER • PORTFOLIO OF 2025 •
+                            </textPath>
+                        </text>
+                    </svg>
+                </div>
+                <div class="badge-inner">
+                    TOP<br/>DESIGN<br/>2025
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add wave animation
+            const wavePaths = document.querySelectorAll('.wave-bg path');
+            
+            // Add random movement to each wave
+            wavePaths.forEach((path, index) => {
+                path.style.animation = `move ${15 + index * 5}s ease-in-out infinite`;
+            });
+            
+            // Handle hamburger menu for mobile
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            hamburger.addEventListener('click', () => {
+                mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+                setTimeout(() => {
+                    mobileMenu.classList.toggle('active');
+                }, 10);
+            });
+            
+            // Close mobile menu when window is resized to desktop size
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    mobileMenu.style.display = 'none';
+                    mobileMenu.classList.remove('active');
+                }
+            });
+            
+            // Custom cursor animation
+            const cursor = document.querySelector('.cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
+            
+            if(window.innerWidth > 768) {
+                cursor.style.display = 'block';
+                cursorFollower.style.display = 'block';
+            }
+            
+            document.addEventListener('mousemove', function(e) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    cursorFollower.style.left = e.clientX + 'px';
+                    cursorFollower.style.top = e.clientY + 'px';
+                }, 100);
+            });
+            
+            document.addEventListener('mousedown', function() {
+                cursor.style.width = '15px';
+                cursor.style.height = '15px';
+                cursorFollower.style.width = '6px';
+                cursorFollower.style.height = '6px';
+            });
+            
+            document.addEventListener('mouseup', function() {
+                cursor.style.width = '20px';
+                cursor.style.height = '20px';
+                cursorFollower.style.width = '8px';
+                cursorFollower.style.height = '8px';
+            });
+            
+            // Change cursor on hoverable elements
+            const links = document.querySelectorAll('a, button');
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    cursor.style.borderColor = '#635fff';
+                    cursor.style.width = '30px';
+                    cursor.style.height = '30px';
+                    cursorFollower.style.opacity = '0';
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    cursor.style.borderColor = 'white';
+                    cursor.style.width = '20px';
+                    cursor.style.height = '20px';
+                    cursorFollower.style.opacity = '1';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
